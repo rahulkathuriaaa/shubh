@@ -11,7 +11,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains}>
+
       <body className={inter.className}>{children}</body>
+      </RainbowKitProvider>
+      </WagmiConfig>
     </html>
   )
 }

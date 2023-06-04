@@ -1,5 +1,35 @@
 import React from 'react'
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
+
+const { chains, publicClient } = configureChains(
+  [mainnet, polygon, optimism, arbitrum],
+  [
+    alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    publicProvider()
+  ]
+);
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains
+});
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient
+})
 const Navbar = () => {
   return (
     <div>
@@ -17,7 +47,7 @@ const Navbar = () => {
       <a class="mr-5 hover:text-white">Third Link</a>
       <a class="mr-5 hover:text-white">Fourth Link</a>
     </nav>
-    <button class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-500  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Connect Wallet
+    <button class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-500  px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"><ConnectButton/>
     
     </button>
   </div>
