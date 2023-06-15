@@ -9,7 +9,6 @@ const Home: NextPage = () => {
   return (
     <div >
       <Navbar/>
-      {/* <h1 className='font-semibold bg-green-500'>Hello World</h1> */}
       <Hero/>
       <Footer/>
     </div>

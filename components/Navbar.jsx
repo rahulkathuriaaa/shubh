@@ -1,6 +1,6 @@
 import React from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
@@ -14,7 +14,7 @@ const Navbar = () => {
       <span class="ml-3 text-xl font-semibold">Beluga</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-white">First Link</a>
+      <Link href='/revoke' class="mr-5 hover:text-white">Revoke</Link>
       <a class="mr-5 hover:text-white">Second Link</a>
       <a class="mr-5 hover:text-white">Third Link</a>
       <a class="mr-5 hover:text-white">Fourth Link</a>
