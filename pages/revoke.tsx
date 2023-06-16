@@ -2,6 +2,26 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import { Dropdown } from "@nextui-org/react";
 
+import Moralis from "moralis";
+import { EvmChain } from "@moralisweb3/common-evm-utils";
+
+const runApp = async () => {
+  await Moralis.start({
+    apiKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImVmNGIxMzkyLTQ2MmYtNDAxNi1iNjZiLThiNDU1ZGIzZDkyZiIsIm9yZ0lkIjoiMTE1NTU1IiwidXNlcklkIjoiMTE1MjAxIiwidHlwZUlkIjoiNjhmM2FkMDctYmYwOC00ODhlLWI5MDUtY2ZiZjFhODkxZmFhIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE2ODY5MjE3MzAsImV4cCI6NDg0MjY4MTczMH0.DoxVy4nUDreyYrFyoX6vzzWjSUZYb-5Lb1RFLku-Aps",
+    // ...and any other configuration
+  });
+
+  const address = "0x2970016580aCe251cDC15de5B29d3F13f77d19aC";
+
+  const chain = EvmChain.MUMBAI;
+
+  const response = await Moralis.EvmApi.nft.getWalletNFTs({
+    address,
+    chain,
+  });
+
+  console.log(response.toJSON());
+};
 
 const revoke = () => {
   return (
@@ -82,7 +102,9 @@ const revoke = () => {
                                         <div className="border border-black dark:border-white rounded-lg overflow-x-scroll whitespace-nowrap scrollbar-hide">
                                             <table className="w-full border-collapse allowances-table">
                                                 <thead>
-                                                    <tr className="border-b border-black dark:border-white h-10"><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Asset</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Type</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Allowance</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Authorized Spender</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Last Updated</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-right">Actions</div></th></tr></thead></table><div className="flex flex-col justify-center items-center p-3 gap-2 w-full h-10"></div></div></div></div><div className="absolute inset-0 flex justify-center items-center"></div></div></div></main>
+                                                    <tr className="border-b border-black dark:border-white h-10"><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Asset</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Type</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Allowance</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Authorized Spender</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-left">Last Updated</div></th><th className="text-left px-2 whitespace-nowrap"><div className="font-bold text-right">Actions</div></th></tr></thead></table><div className="flex flex-col justify-center items-center p-3 gap-2 w-full h-10"></div></div></div></div><div className="absolute inset-0 flex justify-center items-center"></div></div></div>
+                                                    <button onClick={runApp}>Run app</button>
+                                                    </main>
  
         </div>
     </div>
